@@ -26,26 +26,25 @@
 {% block changeable_body %}
     <div class="login-form">
         <form action="/examples/actions/confirmation.php" method="post">
-            <h2 class="text-center">Log in</h2>       
+            <h2 class="text-center">Registration</h2>       
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Username" required="required">
+                <input type="text" class="form-control" name="mobile_phone" id="mobile_phone" placeholder="Phone Number" required="required" type="number">
             </div>
             <div class="form-group">
-                <input type="password" class="form-control" placeholder="Password" required="required">
+                <input type="password" class="form-control" name="user_password" id="user_password" placeholder="Password" required="required">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="user_conf_password" id="user_conf_password" placeholder="Confirm Password" required="required">
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-block">Log in</button>
-            </div>
-            <div class="clearfix">
-                <label class="pull-left checkbox-inline"><input type="checkbox"> Remember me</label>
-                <a href="#" class="pull-right">Forgot Password?</a>
-            </div>        
+            </div>       
         </form>
-        <p class="text-center"><a href="{% url 'registration_page' %}">Create an Account</a></p>
+        <p class="text-center"><a href="{% url 'login_page' %}">Already have an account? Login.</a></p>
     </div>
 {% endblock changeable_body %}
 
 
 {% block changeable_page_title %}
-      Login Page
+      Registration Page
 {% endblock changeable_page_title %}
