@@ -48,3 +48,15 @@ def auth_registration(request):
             messages.success(request,"you have been registerd successfully.")
             return render(request,'authenticate/registration.html')              
     return render(request,'authenticate/registration.html')
+
+
+def auth_logout(request):
+    del request.session['user_name']
+    return redirect('login_page')
+
+# def forgot_password(request):
+#     if request.method == 'POST':
+#         return password_reset(request, 
+#             from_email=request.POST.get('email'))
+#     else:
+#         return render(request, 'forgot_password.html')

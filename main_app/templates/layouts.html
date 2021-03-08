@@ -49,9 +49,9 @@
                         {{request.user.username}}
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="{% url 'logout' %}" type="submit">LogOut</a>
                         </div>
                     </div>
                 {% elif request.session.user_name%}
@@ -62,7 +62,7 @@
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="#">Action</a>
                         <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" href="{% url 'logout' %}" type="submit">LogOut</a>
                         </div>
                     </div>
                 {% else %}

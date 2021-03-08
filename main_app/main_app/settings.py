@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
     #custom apps
     'authenticate',
 ]
@@ -137,3 +138,13 @@ MESSAGE_TAGS = {
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_USER = os.environ.get('hemel18103112@gmail.com')
+# EMAIL_HOST_PASSWORD = os.environ.get('kdcfyjwjgltckoxn')
+EMAIL_HOST_USER = 'hemel18103112@gmail.com'
+EMAIL_HOST_PASSWORD = 'kdcfyjwjgltckoxn'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

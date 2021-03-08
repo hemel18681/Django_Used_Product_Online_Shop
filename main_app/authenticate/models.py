@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class user_info(models.Model):
     user_name = models.CharField(max_length=50)
@@ -6,7 +7,7 @@ class user_info(models.Model):
     user_mail = models.CharField(max_length=50)
     user_picture = models.ImageField(blank=True, null=True, upload_to='images/')
     user_phone_number =  models.IntegerField(primary_key = True)
-
+    # user = models.OneToOneField(User, on_delete=models.CASCADE)
     def __str__(self):
         return self.user_name
 
