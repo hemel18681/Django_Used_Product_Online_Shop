@@ -25,7 +25,7 @@ SECRET_KEY = 'psvx)w8up8khi-(sc*ptoad5p*awolto_@s!mwsscts(b9e9_d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['6fa03da2f2ac.ngrok.io','localhost','127.0.0.1','testserver']
 
 
 # Application definition
@@ -124,3 +124,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+#alert message is here
+
+from django.contrib.messages import constants as messages
+
+MESSAGE_TAGS = {
+    messages.DEBUG: 'alert-info',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
+}
