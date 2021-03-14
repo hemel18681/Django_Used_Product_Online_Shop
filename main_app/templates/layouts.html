@@ -60,7 +60,7 @@
                         {{request.session.user_name}}
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="{% url 'edit_profile' %}">Edit Profile</a>
                         <a class="dropdown-item" href="#">Another action</a>
                         <a class="dropdown-item" href="{% url 'logout' %}" type="submit">LogOut</a>
                         </div>
