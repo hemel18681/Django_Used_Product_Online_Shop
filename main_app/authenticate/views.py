@@ -10,6 +10,7 @@ from main_app.settings import EMAIL_HOST_USER
 from django.core.files.storage import FileSystemStorage
 from django.core.files.base import ContentFile
 from PIL import Image
+from .forms import uploadformuserpic_get
 
 def auth_login(request):
     try:
@@ -112,30 +113,20 @@ def forget_password(request):
             return render(request,'authenticate/registration.html')
     return render(request,'authenticate/password_reset.html')
 
-
 def user_edit_profile(request):
-    if request.method=='POST' and request.POST['user_picture_file']:
-        myfile = request.POST['user_picture_file']
-        print(myfile)
-        fs = FileSystemStorage()
-        name = ContentFile("hudai")
-        filename = fs.save(myfile,name)
-        url = fs.url(filename)
-        user_name = request.session['user_name']
-        author = user_info.objects.get(user_name=user_name)
-        author.user_password  = request.POST['user_password']
-        author.user_picture = url
-        author.save()
-    elif request.method=='POST':
-        user_name = request.session['user_name']
-        author = user_info.objects.get(user_name=user_name)
-        author.user_password  = request.POST['user_password']
-        author.save()
+    user_name = request.session['user_name']
+    if request.method=='POST':
+        form = uploadformuserpic_get(request.POST, request.FILES,instance=user_info.objects.filter(user_name=user_name).first())
+        if form.is_valid():
+            form.save()
+    else:
+        form = uploadformuserpic_get(instance=user_info.objects.filter(user_name=user_name).first())
     user_name = request.session['user_name']
     author = user_info.objects.filter(user_name=user_name)
     details = author.values()
     print(details)
     context = {
-        'user_info': details
+        'user_info': details,
+        'form': form
     }
     return render(request,'authenticate/edit_profile.html',context)

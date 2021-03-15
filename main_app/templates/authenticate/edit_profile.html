@@ -25,7 +25,7 @@
 
 {% block changeable_body %}
     <div class="login-form">
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <h2 class="text-center">Edit Profile</h2>    
             {% for message in messages %}
@@ -38,7 +38,7 @@
             {% endfor %}  
             <div class="form-group">
                 <label for="user_name"><b>Name:</b></label>
-                <label type="text" class="form-control" name="user_name" id="user_name">{{user_info.0.user_name}} </label>
+                <label type="text" class="form-control" name="user_name" id="user_name">{{user_info.0.user_name}}</label>
             </div>   
             <div class="form-group">
                 <label for="mobile_phone"><b>Phone Number</b></label>
@@ -46,16 +46,16 @@
             </div>
             <div class="form-group">
                 <label for="user_mail"><b>Mail:</b></label>
-                <label type="text" class="form-control" name="user_mail" id="user_mail">{{user_info.0.user_mail}} </label>
+                <label type="text" class="form-control" name="user_mail" id="user_mail">{{user_info.0.user_mail}}</label>
             </div>
             <div>
-                <img src="{{user_info.0.user_picture}}" style="height: 200px; width: 300px;" alt="No picture added">
                 <label for="user_picture_file">User picture:</label>
-                <input type="file" name="user_picture_file" accept="image/*" id="user_picture_file">
+                <img src="{{form.user_picture.url}}" style="height: 200px; width: 300px;" alt="No picture added">
+                <input type="file" name="user_picture" accept="image/*" id="user_picture">
             </div>
             <div class="form-group">
                 <label for="user_name"><b>Password:</b></label>
-                <input  value="{{user_info.0.user_password}}" type="password" class="form-control" name="user_password" id="user_password" required="required">
+                {{form.user_password}}
             </div>   
             <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-block">Update</button>
