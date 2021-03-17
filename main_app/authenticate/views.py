@@ -61,6 +61,33 @@ def auth_registration(request):
         if request.session['user_name'] is not None:
             messages.error(request,'You are already logged in.')
             return redirect('home_page')
+        else:
+            if request.method=='POST':
+                user_name = request.POST['user_name']
+                user_phone_number = request.POST['mobile_phone']
+                user_mail = request.POST['user_mail']
+                user_password = request.POST['user_password']
+                user_confirm_password = request.POST['user_confirm_password']
+                if user_info.objects.filter(user_phone_number=user_phone_number).exists():
+                    messages.error(request,'You are already registered with this phone number.')
+                elif user_info.objects.filter(user_name=user_name).exists():
+                    messages.error(request,'This username has already been used try new one.')
+                elif user_info.objects.filter(user_mail=user_mail).exists():
+                    messages.error(request,'You are already registered with this phone number.')
+                elif user_password != user_confirm_password:
+                    messages.error(request,'password and confirm password not matched')
+                elif len(user_password)<6:
+                    messages.error(request,'password length cannot have less than 6 digits')
+                else:
+                    saverecord = user_info()
+                    saverecord.user_phone_number = user_phone_number
+                    saverecord.user_name = user_name
+                    saverecord.user_mail = user_mail
+                    saverecord.user_password = user_password
+                    saverecord.user_picture = "hudai"
+                    saverecord.save()
+                    messages.success(request,"you have been registerd successfully.")
+                    return redirect('home_page')
     except:
             if request.method=='POST':
                 user_name = request.POST['user_name']
@@ -84,9 +111,10 @@ def auth_registration(request):
                     saverecord.user_name = user_name
                     saverecord.user_mail = user_mail
                     saverecord.user_password = user_password
+                    saverecord.user_picture = "hudai"
                     saverecord.save()
                     messages.success(request,"you have been registerd successfully.")
-                    return render(request,'authenticate/login.html')             
+                    return redirect('home_page')             
     return render(request,'authenticate/registration.html')
 
 

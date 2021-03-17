@@ -49,9 +49,11 @@
                 <label type="text" class="form-control" name="user_mail" id="user_mail">{{user_info.0.user_mail}}</label>
             </div>
             <div>
-                <label for="user_picture_file">User picture:</label>
-                <img src="{{form.user_picture.url}}" style="height: 200px; width: 300px;" alt="No picture added">
+                <label for="user_picture_file"><b>User picture:</b></label>
+                <img src="{{form.instance.user_picture.url }}" style="height: 200px; width: 150px;" alt="no file uploaded" >
+                <br><br>
                 <input type="file" name="user_picture" accept="image/*" id="user_picture">
+                <br><br>
             </div>
             <div class="form-group">
                 <label for="user_name"><b>Password:</b></label>

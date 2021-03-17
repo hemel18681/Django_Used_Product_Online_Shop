@@ -25,7 +25,7 @@ SECRET_KEY = 'psvx)w8up8khi-(sc*ptoad5p*awolto_@s!mwsscts(b9e9_d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['6fa03da2f2ac.ngrok.io','localhost','127.0.0.1','testserver']
+ALLOWED_HOSTS = ['9c87dd7e1b87.ngrok.io','localhost','127.0.0.1','testserver']
 
 
 # Application definition
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     #custom apps
     'authenticate',
+    'post_details',
 ]
 
 MIDDLEWARE = [

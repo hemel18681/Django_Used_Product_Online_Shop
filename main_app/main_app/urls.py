@@ -8,4 +8,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.home,name='home_page'),
     path('login/',include('authenticate.urls')),
+    path('post_info/',include('post_details.urls'))
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
