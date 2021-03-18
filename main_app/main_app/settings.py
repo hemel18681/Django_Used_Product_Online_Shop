@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     #custom apps
     'authenticate',
     'post_details',
+    'sorl.thumbnail',
 ]
 
 MIDDLEWARE = [

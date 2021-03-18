@@ -1,5 +1,7 @@
 from django.db import models
 from authenticate.models import user_info
+from sorl.thumbnail import get_thumbnail
+from django.utils.html import format_html
 # Create your models here.
 
 class pending_post(models.Model):
@@ -9,8 +11,20 @@ class pending_post(models.Model):
     post_picture = models.ImageField(upload_to='post_images/')
     post_bkash = models.CharField(max_length=50)
     post_accept = models.BooleanField(default=False)
+    post_given_date = models.DateField( auto_now_add=True)
     def __str__(self):
         return self.post_title
 
     def get_absolute_url(self):
         return reverse("pending_post_detail", kwargs={"pk": self.pk})
+    
+    @property
+    def thumbnail_preview(self):
+        if self.post_picture:
+            _thumbnail = get_thumbnail(self.post_picture,
+                                   '300x300',
+                                   upscale=False,
+                                   crop=False,
+                                   quality=100)
+            return format_html('<img src="{}" width="{}" height="{}">'.format(_thumbnail.url, _thumbnail.width, _thumbnail.height))
+        return ""

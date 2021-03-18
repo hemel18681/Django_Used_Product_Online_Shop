@@ -48,6 +48,10 @@
                 <label for="user_mail"><b>Mail:</b></label>
                 <label type="text" class="form-control" name="user_mail" id="user_mail">{{user_info.0.user_mail}}</label>
             </div>
+            <div class="form-group">
+                <label for="user_join_date"><b>Join Date:</b></label>
+                <label type="text" class="form-control" name="user_join_date" id="user_join_date">{{user_info.0.user_join_date}}</label>
+            </div>
             <div>
                 <label for="user_picture_file"><b>User picture:</b></label>
                 <img src="{{form.instance.user_picture.url }}" style="height: 200px; width: 150px;" alt="no file uploaded" >
