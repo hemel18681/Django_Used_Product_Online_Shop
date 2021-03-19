@@ -1,0 +1,102 @@
+<style>
+	.login-form {
+		width: 700px;
+    	margin: 50px auto;
+	}
+    .login-form form {
+    	margin-bottom: 15px;
+        background: #f7f7f7;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        padding: 30px;
+    }
+    .login-form h2 {
+        margin: 0 0 15px;
+    }
+    .form-control, .btn {
+        min-height: 38px;
+        border-radius: 2px;
+    }
+    .btn {        
+        font-size: 15px;
+        font-weight: bold;
+    }
+</style>
+{% extends 'layouts.html' %}
+
+{% block changeable_body %}
+    <div class="login-form">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h2 class="text-center">User Profile</h2>    
+            {% for message in messages %}
+                <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{ message }}
+                </div>
+            {% endfor %}  
+            <div class="form-group">
+                <label for="user_name"><b>Name:</b></label>
+                <label type="text" class="form-control" name="user_name" id="user_name">{{user_details.0.user_name}}</label>
+            </div>   
+            <div class="form-group">
+                <label for="mobile_phone"><b>Phone Number</b></label>
+                <label type="text" class="form-control" name="mobile_phone" id="mobile_phone">{{user_details.0.user_phone_number}} </label>
+            </div>
+            <div class="form-group">
+                <label for="user_mail"><b>Mail:</b></label>
+                <label type="text" class="form-control" name="user_mail" id="user_mail">{{user_details.0.user_mail}}</label>
+            </div>
+            <div>
+                <label for="user_picture_file"><b>User picture:</b></label> <br>
+                <img src="{{user_details.0.user_picture.url }}" style="height: 200px; width: 150px;" alt="no file uploaded" >
+            </div>  
+        </form>
+        <br>
+        <hr>
+        <br>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h2 class="text-center">Product Profile</h2>    
+            {% for message in messages %}
+                <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{ message }}
+                </div>
+            {% endfor %}  
+            <div class="form-group">
+                <label for="post_title"><b>Product Title:</b></label>
+                <label type="text" class="form-control" name="post_title" id="post_title">{{post_details.0.post_title}}</label>
+            </div>   
+            <div class="form-group">
+                <label for="post_description"><b>Product Description</b></label> <br>
+                <div>{{post_details.0.post_description}} </div>
+            </div>
+            <br><br>
+            <div>
+                <label for="post_picture"><b>Product picture:</b></label> <br>
+                <img src="{{ post_details.0.post_picture.url }}" style="height: 250px; width: 250px;" alt="no file uploaded" >
+            </div>
+            <div>
+                <br>
+                <a href="{% url 'indivisual_view' post_id=post_details.0.id %}">for full view of the image..click here</a>
+            </div>
+            
+            
+                
+        </form>
+    </div>
+    {% if request.session.user_name == user_details.0.user_name %}
+        <div class="login-form" style="width: 300px;"> 
+            <a href="#"><button class="btn btn-primary btn-block">Mark As Sold</button></a>
+        </div>
+    {% endif %}
+{% endblock changeable_body %}
+
+
+{% block changeable_page_title %}
+      Product Details Page
+{% endblock changeable_page_title %}

@@ -20,6 +20,7 @@
         font-size: 15px;
         font-weight: bold;
     }
+	
 </style>
 
 {% extends 'layouts.html' %}
@@ -48,10 +49,13 @@
 						<article class="hentry">
 						<header class="entry-header">
 							{% for post in all_post %}
-								<div class="entry-thumbnail">
-									<a href="#"><img src="{{ post.post_picture.url }}" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="p1"/></a>
-									<h2 class="entry-title"><a href="#" rel="bookmark">{{ post.post_title }}</a></h2>
-								</div>
+									<div class="entry-thumbnail">
+										<label hidden>{{post.id}}</label>
+										<img src="{{ post.post_picture.url }}" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" style="width: 250px; height: 250px;" alt="p1"/>
+										<br>
+										<a href="{% url 'post_details' post_id=post.id %}">{{ post.post_title }} </a>
+										<br> <br>
+									</div>
 							{% endfor %}
 						<div class="entry-thumbnail">
 							

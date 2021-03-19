@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,17 +16,29 @@
 <!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
+<link rel="stylesheet" type="text/css" href="{% static 'main_app/style.css' %}">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Oswald:400,500,700%7CRoboto:400,500,700%7CHerr+Von+Muellerhoff:400,500,700%7CQuattrocento+Sans:400,500,700' type='text/css' media='all'/>
 
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
+<style>
+    a{
+        color: black;
+        font-size: x-large;
+        font-weight: 700;
+        font-style: italic;
+        align-content: center;
+        ali
+    }
+    a:hover{
+        color: sandybrown;
+    }
+</style>
 
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+<body style="background-color: darkcyan;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="/">WA_x0r_AC</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -36,7 +49,7 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="{% url 'home_page' %}">
                         <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">
-                            Home <span class="sr-only">(current)</span>
+                             Home <span class="sr-only">(current)</span>
                         </button>
                     </a>
                 </li>
@@ -83,10 +96,21 @@
             </ul>
         </div>
     </nav>
-
+    
     {% block changeable_body %}
       
     {% endblock changeable_body %}
+
+    <div >
+        <footer id="footer">
+            <center>
+                <div id="part2">
+                    <i><p id="txt6">Copyright &copy; 2021. All right reserved by Asif Uddin Ahmed Hemel </p></i>
+                </div>
+            </center>
+        </footer>
+        
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
