@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from authenticate.models import user_info
-from post_details.models import pending_post
+from post_details.models import pending_post, running_post
 from django.contrib.auth.hashers import make_password
 from django.core.mail import send_mail
 from main_app.settings import EMAIL_HOST_USER
@@ -45,15 +45,23 @@ def check_post(request):
         return render(request,'post_manage/wait_post.html')
 
 
-# def all_post(request):
-#     user_name = request.session['user_name']
-#     author = user_info.objects.filter(user_name=user_name)
-#     details = author.values()
-#     phone_number = details[0]['user_phone_number']
-#     set_size = pending_post.objects.filter(user_phone_number=phone_number)
-#     if set_size.count()== int(0):
-#         messages.error(request,'You don\'t have any post right now')
-#         return render(request,'post_manage/all_post_list.html')
-#     else:
-#         return render()
+def syncronize_post(request):
+    all_accept = pending_post.objects.filter(post_accept=True).all()
+    for star in all_accept.iterator():
+        saverecord = running_post()
+        saverecord.user_phone_number = star.user_phone_number
+        saverecord.post_title = star.post_title
+        saverecord.post_description = star.post_description
+        saverecord.post_picture = star.post_picture
+        saverecord.post_bkash = star.post_bkash
+        saverecord.done_post = False
+        saverecord.post_given_date = star.post_given_date
+        saverecord.save()
+        pending_post.objects.filter(id=star.id).delete()
+    all_post = running_post.objects.all()
+    context = {
+        'all_post':all_post,
+    }
+    return render(request,'index.html',context)
+
 

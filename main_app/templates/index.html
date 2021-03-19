@@ -1,9 +1,79 @@
+<style>
+	.login-form {
+		width: 340px;
+    	margin: 50px auto;
+	}
+    .login-form form {
+    	margin-bottom: 15px;
+        background: #f7f7f7;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        padding: 30px;
+    }
+    .login-form h2 {
+        margin: 0 0 15px;
+    }
+    .form-control, .btn {
+        min-height: 38px;
+        border-radius: 2px;
+    }
+    .btn {        
+        font-size: 15px;
+        font-weight: bold;
+    }
+</style>
+
 {% extends 'layouts.html' %}
 
 {% block changeable_body %}
-<div class="jumbotron">
-  <h1>main page</h1>
+<div class="login-form">
+  {% for message in messages %}
+    <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+        {{ message }}
+    </div>
+  {% endfor %}   
 </div>
+
+<div>
+	
+	<div id="page">
+		<div class="container">
+			<div id="content" class="site-content">
+				<div id="primary" class="content-area column full">
+					<main id="main" class="site-main">
+					<div class="grid portfoliogrid">
+					
+						<article class="hentry">
+						<header class="entry-header">
+							{% for post in all_post %}
+								<div class="entry-thumbnail">
+									<a href="#"><img src="{{ post.post_picture.url }}" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="p1"/></a>
+									<h2 class="entry-title"><a href="#" rel="bookmark">{{ post.post_title }}</a></h2>
+								</div>
+							{% endfor %}
+						<div class="entry-thumbnail">
+							
+						</div>
+						
+						</header>
+						</article>
+					</div>
+					<!-- .grid -->
+					<br/>
+					</main>
+					<!-- #main -->
+				</div>
+				<!-- #primary -->
+			</div>
+			<!-- #content -->
+		</div>
+		<!-- .container -->
+		<a href="#top" class="smoothup" title="Back to top"><span class="genericon genericon-collapse"></span></a>
+	</div>
+</div>
+
 {% endblock changeable_body %}
 
 {% block changeable_page_title %}

@@ -8,5 +8,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.home,name='home_page'),
     path('login/',include('authenticate.urls')),
-    path('post_info/',include('post_details.urls'))
+    path('post_info/',include('post_details.urls')),
+    path('admin_page/', views.admin_page, name='admin_page'),
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
