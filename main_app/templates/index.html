@@ -51,7 +51,18 @@
 							{% for post in all_post %}
 									<div class="entry-thumbnail">
 										<label hidden>{{post.id}}</label>
-										<img src="{{ post.post_picture.url }}" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" style="width: 250px; height: 250px;" alt="p1"/>
+										<table>
+											<tr>
+												<td>
+													<img src="{{ post.post_picture.url }}" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" style="width: 250px; height: 250px;" alt="p1"/>
+												</td>
+												<td style="width: 100px;"></td>
+												<td> 
+													<h4><b>Post Description:</b></h4>
+													<p>{{post.post_description|truncatechars_html:30}}</p>
+												</td>
+											</tr>
+										</table>
 										<br>
 										<a href="{% url 'post_details' post_id=post.id %}">{{ post.post_title }} </a>
 										<br> <br>

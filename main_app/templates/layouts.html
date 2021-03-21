@@ -30,7 +30,6 @@
         font-weight: 700;
         font-style: italic;
         align-content: center;
-        ali
     }
     a:hover{
         color: sandybrown;
@@ -62,25 +61,25 @@
             </ul>
             <ul class="navbar-nav mr-lg-5" >
                 {% if user.is_authenticated %}
-                    <div class="dropdown">
+                    <div class="dropdown" style="margin-right: 15px;">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{request.user.username}}
                         </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="font-size: small;">
                             <a class="dropdown-item" href="{% url 'admin_page' %}">Admin Work Page</a>
                             <a class="dropdown-item" href="{% url 'syncronize_post' %}">Syncronize</a>
                             <a class="dropdown-item" href="/admin/logout/" type="submit">LogOut</a>
                         </div>
                     </div>
                 {% elif request.session.user_name%}
-                    <div class="dropdown">
+                    <div class="dropdown" style="margin-right: 15px;">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{request.session.user_name}}
                         </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="{% url 'edit_profile' %}">Edit Profile</a>
-                        <a class="dropdown-item" href="{% url 'wait_post' %}">Make a Post</a>
-                        <a class="dropdown-item" href="{% url 'logout' %}" type="submit">LogOut</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="font-size: small;">
+                        <a class="dropdown-item" href="{% url 'edit_profile' %}"style="font-size: small;">Edit Profile</a>
+                        <a class="dropdown-item" href="{% url 'wait_post' %}"style="font-size: small;">Make a Post</a>
+                        <a class="dropdown-item" href="{% url 'logout' %}"style="font-size: small;" type="submit">LogOut</a>
                         </div>
                     </div>
                 {% else %}

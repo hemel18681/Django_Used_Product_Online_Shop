@@ -82,7 +82,9 @@
             </div>
             <div>
                 <br>
-                <a href="{% url 'indivisual_view' post_id=post_details.0.id %}">for full view of the image..click here</a>
+                <small>
+                    <a style="font-size: small;" href="{% url 'indivisual_view' post_id=post_details.0.id %}">for full view of the image..click here</a>
+                </small>
             </div>
             
             
@@ -91,7 +93,7 @@
     </div>
     {% if request.session.user_name == user_details.0.user_name %}
         <div class="login-form" style="width: 300px;"> 
-            <a href="#"><button class="btn btn-primary btn-block">Mark As Sold</button></a>
+            <a href="#"><button class="btn btn-primary btn-block" style="color: black; font-weight: 700;">Mark As Sold</button></a>
         </div>
     {% endif %}
 {% endblock changeable_body %}
