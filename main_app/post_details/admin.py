@@ -4,7 +4,7 @@ from django.contrib import admin
 from .models import pending_post, running_post
 
 class show_on_admin(admin.ModelAdmin):
-    readonly_fields = ('user_phone_number','post_title','post_description','post_picture','thumbnail_preview','post_bkash','post_given_date')
+    readonly_fields = ('user_phone_number','post_title','post_description','post_picture','thumbnail_preview','post_money','post_used_days','post_given_date')
     list_display = ('post_title', 'thumbnail_preview')
     def thumbnail_preview(self, obj):
         return obj.thumbnail_preview

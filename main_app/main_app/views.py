@@ -39,3 +39,4 @@ def indivisual_view_pic(request,post_id):
         'post_details':post_details,
     }
     return render(request,'full_picture.html',context)
+

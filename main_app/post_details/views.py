@@ -53,7 +53,8 @@ def syncronize_post(request):
         saverecord.post_title = star.post_title
         saverecord.post_description = star.post_description
         saverecord.post_picture = star.post_picture
-        saverecord.post_bkash = star.post_bkash
+        saverecord.post_money = star.post_money
+        saverecord.post_used_days = star.post_used_days
         saverecord.done_post = False
         saverecord.post_given_date = star.post_given_date
         saverecord.save()
@@ -65,3 +66,26 @@ def syncronize_post(request):
     return render(request,'index.html',context)
 
 
+def update_post(request,post_id):
+    id  = post_id
+    if request.method=='POST':
+        form = make_post_form(request.POST, request.FILES)
+        if form.is_valid:
+            print(request.POST['user_phone_number'])
+            if user_info.objects.filter(user_name=user_name, user_password = request.POST['user_password']).exists():
+                form.save()
+                return redirect('home_page')
+            else:
+                messages.error(request,'username or password is wrong')
+                form = make_post_form()
+                context = {
+                    'form': form,
+                }
+                return render(request,'post_manage/make_post.html',context)
+    else:
+        form = make_post_form()
+        context = {
+            'form': form,
+        }
+    return render(request,'post_manage/make_post.html',context)
+    return render(request,'update_post.html',context)

@@ -9,7 +9,8 @@ class pending_post(models.Model):
     post_title = models.CharField(max_length=100)
     post_description = models.TextField()
     post_picture = models.ImageField(upload_to='post_images/')
-    post_bkash = models.CharField(max_length=50)
+    post_money = models.DecimalField(max_digits=20, decimal_places=2)
+    post_used_days = models.IntegerField(default=0)
     post_accept = models.BooleanField(default=False)
     post_given_date = models.DateField( auto_now_add=True)
     def __str__(self):
@@ -34,7 +35,8 @@ class running_post(models.Model):
     post_title = models.CharField(max_length=100)
     post_description = models.TextField()
     post_picture = models.ImageField(upload_to='post_images/')
-    post_bkash = models.CharField(max_length=50)
+    post_money = models.DecimalField(max_digits=20, decimal_places=2)
+    post_used_days = models.IntegerField(default=0)
     done_post = models.BooleanField(default=False)
     post_given_date = models.DateField( auto_now_add=True)
     def __str__(self):

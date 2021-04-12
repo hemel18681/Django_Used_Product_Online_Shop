@@ -68,6 +68,7 @@ def auth_registration(request):
                 user_mail = request.POST['user_mail']
                 user_password = request.POST['user_password']
                 user_confirm_password = request.POST['user_confirm_password']
+                user_card_number = request.POST['user_card_number']
                 if user_info.objects.filter(user_phone_number=user_phone_number).exists():
                     messages.error(request,'You are already registered with this phone number.')
                 elif user_info.objects.filter(user_name=user_name).exists():
@@ -85,6 +86,7 @@ def auth_registration(request):
                     saverecord.user_mail = user_mail
                     saverecord.user_password = user_password
                     saverecord.user_picture = "hudai"
+                    saverecord.user_card_number = user_card_number
                     saverecord.save()
                     messages.success(request,"you have been registerd successfully.")
                     return redirect('home_page')
@@ -95,6 +97,7 @@ def auth_registration(request):
                 user_mail = request.POST['user_mail']
                 user_password = request.POST['user_password']
                 user_confirm_password = request.POST['user_confirm_password']
+                user_card_number = request.POST['user_card_number']
                 if user_info.objects.filter(user_phone_number=user_phone_number).exists():
                     messages.error(request,'You are already registered with this phone number.')
                 elif user_info.objects.filter(user_name=user_name).exists():
@@ -112,6 +115,7 @@ def auth_registration(request):
                     saverecord.user_mail = user_mail
                     saverecord.user_password = user_password
                     saverecord.user_picture = "hudai"
+                    saverecord.user_card_number = user_card_number
                     saverecord.save()
                     messages.success(request,"you have been registerd successfully.")
                     return redirect('home_page')             
@@ -147,6 +151,7 @@ def user_edit_profile(request):
         form = uploadformuserpic_get(request.POST, request.FILES,instance=user_info.objects.filter(user_name=user_name).first())
         if form.is_valid():
             form.save()
+            messages.success(request,"Updated.")
     else:
         form = uploadformuserpic_get(instance=user_info.objects.filter(user_name=user_name).first())
     user_name = request.session['user_name']

@@ -4,7 +4,7 @@ from .models import user_info
 
 
 class show_on_admin(admin.ModelAdmin):
-    readonly_fields = ('user_join_date','user_name','user_mail','user_password','user_picture','thumbnail_preview','user_phone_number')
+    readonly_fields = ('user_join_date','user_name','user_mail','user_password','user_picture','thumbnail_preview','user_phone_number','user_card_number')
     def thumbnail_preview(self, obj):
         return obj.thumbnail_preview
 

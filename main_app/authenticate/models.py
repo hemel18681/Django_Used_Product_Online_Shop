@@ -10,6 +10,7 @@ class user_info(models.Model):
     user_picture = models.ImageField(upload_to='user_images/', blank=True, null=True)
     user_phone_number =  models.IntegerField(primary_key = True)
     user_join_date = models.DateField( auto_now_add=True)
+    user_card_number = models.IntegerField()
     def __str__(self):
         return self.user_name
 
