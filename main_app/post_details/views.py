@@ -69,23 +69,18 @@ def syncronize_post(request):
 def update_post(request,post_id):
     id  = post_id
     if request.method=='POST':
-        form = make_post_form(request.POST, request.FILES)
-        if form.is_valid:
-            print(request.POST['user_phone_number'])
-            if user_info.objects.filter(user_name=user_name, user_password = request.POST['user_password']).exists():
+        form = make_post_form(request.POST, request.FILES,instance=running_post.objects.filter(id=id).first())
+        if form.is_valid():
+            user_phone_number = request.POST['user_phone_number']
+            if user_info.objects.filter(user_phone_number=user_phone_number, user_password = request.POST['user_password']).exists():
                 form.save()
-                return redirect('home_page')
+                messages.success(request,"Updated.")
             else:
-                messages.error(request,'username or password is wrong')
-                form = make_post_form()
-                context = {
-                    'form': form,
-                }
-                return render(request,'post_manage/make_post.html',context)
-    else:
-        form = make_post_form()
-        context = {
-            'form': form,
-        }
-    return render(request,'post_manage/make_post.html',context)
+                messages.success(request,"Username or Password maybe incorrect.")
+        else:
+            form = make_post_form(instance=running_post.objects.filter(id=id).first())
+    form = make_post_form(instance=running_post.objects.filter(id=id).first())
+    context = {
+        'form': form,
+    }
     return render(request,'update_post.html',context)

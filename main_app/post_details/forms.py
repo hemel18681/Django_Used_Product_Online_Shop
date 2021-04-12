@@ -11,4 +11,5 @@ class make_post_form(forms.ModelForm):
             'post_money': forms.TextInput(attrs={'class': 'form-control'}),
             'post_used_days': forms.TextInput(attrs={'class': 'form-control'}),
             'user_phone_number': forms.TextInput(attrs={'class': 'form-control'}),
+            
         }

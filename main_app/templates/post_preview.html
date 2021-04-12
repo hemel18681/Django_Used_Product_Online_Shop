@@ -20,6 +20,7 @@
         font-size: 15px;
         font-weight: bold;
     }
+    
 </style>
 {% extends 'layouts.html' %}
 
@@ -101,11 +102,58 @@
     </div>
     {% if request.session.user_name == user_details.0.user_name %}
         <div class="login-form" style="width: 300px;"> 
-            <a href="#"><button class="btn btn-primary btn-block" style="color: black; font-weight: 700;">Update Info</button></a>
+            <a href="{% url 'update_post' post_id=post_details.0.id %}"><button class="btn btn-primary btn-block" style="color: black; font-weight: 700;">Update Info</button></a>
         </div>
     {% else %}
         <div class="login-form" style="width: 300px;"> 
-            <a href="#"><button class="btn btn-primary btn-block" style="color: black; font-weight: 700;">Buy the product</button></a>
+            <div id="paypal-button-container"></div>
+
+                <!-- Include the PayPal JavaScript SDK -->
+                <script src="https://www.paypal.com/sdk/js?client-id=test&components=buttons,funding-eligibility"></script>
+
+                <script>
+                    // Render the PayPal button into #paypal-button-container
+                    var FUNDING_SOURCES = [
+                        paypal.FUNDING.PAYPAL,
+                    ];
+
+                    // Loop over each funding source / payment method
+                    FUNDING_SOURCES.forEach(function(fundingSource) {
+                        // Initialize the buttons
+                        paypal.actions
+                        var button = paypal.Buttons({
+                            fundingSource: fundingSource,
+                            createOrder: function(data, actions) {
+                                var first =  actions.order.create({
+                                    purchase_units: [{
+                                        amount: {
+                                            value: '50'
+                                        },
+                                        payee:{
+                                            email_address:'hudai2@gmail.com'
+                                        }
+                                    }]
+                                });   
+                                return first
+                            },
+                            // Finalize the transaction
+                            onApprove: function(data, actions) {
+                                return actions.order.capture().then(function(details) {
+                                    // Show a success message to the buyer
+                                    alert('Transaction completed by ' + details.payer.name.given_name + '!');
+                                });
+                            }
+                        });
+
+                        // Check if the button is eligible
+                        if (button.isEligible()) {
+
+                            // Render the standalone button for that funding source
+                            button.render('#paypal-button-container');
+                        }
+                    });
+                    
+                </script>
         </div>
     {% endif %}
 {% endblock changeable_body %}
@@ -114,3 +162,5 @@
 {% block changeable_page_title %}
       Product Details Page
 {% endblock changeable_page_title %}
+
+            

@@ -1,0 +1,89 @@
+<style>
+	.login-form {
+		width: 500px;
+    	margin: 50px auto;
+	}
+    .login-form form {
+    	margin-bottom: 15px;
+        background: #f7f7f7;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        padding: 30px;
+    }
+    .login-form h2 {
+        margin: 0 0 15px;
+    }
+    .form-control, .btn {
+        min-height: 38px;
+        border-radius: 2px;
+    }
+    .btn {        
+        font-size: 15px;
+        font-weight: bold;
+    }
+</style>
+{% extends 'layouts.html' %}
+
+{% block changeable_body %}
+    <div class="login-form">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h2 class="text-center">Make A Post</h2>    
+            {% for message in messages %}
+                <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{ message }}
+                </div>
+            {% endfor %}  
+            <div class="form-group">
+                <label for="post_title"><b>Post Title:</b></label>
+                {{form.post_title}}
+            </div>   
+            <div class="form-group">
+                <label for="post_description"><b>Post Description:</b></label>
+                <br>
+                {{form.post_description}}
+            </div>
+            <div>
+                <label for="post_picture">Enter the picture for your post:</label>
+                <br>
+                <img src="{{form.instance.post_picture.url }}" style="height: 200px; width: 150px;" alt="no file uploaded" >
+                <br><br>
+                <input type="file" name="user_picture" accept="image/*" id="user_picture">
+                <br><br>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="post_money"><b>Enter the amount of your product:</b></label>
+                {{form.post_money}}
+            </div>
+            <div class="form-group">
+                <label for="post_money"><b>Enter the amount of days you have been used this product:</b></label>
+                {{form.post_used_days}}
+            </div>
+            <br>
+            <div>
+                <div>
+                    <h6>Enter your phone number and password for validation.</h6>
+                </div>
+                <div class="form-group">
+                    <label for="user_name"><b>Phone Number:</b></label>
+                    {{form.user_phone_number}}
+                </div>
+                <div class="form-group">
+                    <label for="user_name"><b>Password:</b></label>
+                    <input class="form-control" type="password" name="user_password" id="user_password" required>
+                </div> 
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block">Update Product Info</button>
+            </div>       
+        </form>
+    </div>
+{% endblock changeable_body %}
+
+
+{% block changeable_page_title %}
+      Make A Post Page
+{% endblock changeable_page_title %}
