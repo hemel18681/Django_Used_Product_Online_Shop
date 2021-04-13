@@ -19,6 +19,10 @@ def admin_page(request):
     return redirect('/admin/')
 
 def post_view(request,post_id):
+    user_name = request.session['user_name']
+    if user_name is None:
+        messages.success(request, "Please login first.");
+        return render(request, 'authenticate\login.html')
     id = post_id
     post_details = running_post.objects.filter(id=id)
     details = post_details.values()
