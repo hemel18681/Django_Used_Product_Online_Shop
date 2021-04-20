@@ -15,6 +15,7 @@ from PIL import Image
 import _datetime
 from datetime import timedelta
 from django.utils import timezone
+from decimal import Decimal
 
 
 def check_report(request):
@@ -35,8 +36,13 @@ def check_report(request):
             reports=selling_report.objects.filter(selling_date__lte=todate,selling_date__gte=formdate)
     else:
         reports=selling_report.objects.all()
+    total_earning = Decimal(0.0)
+    for star in reports.iterator():
+        total_earning = total_earning + star.profit_price
+    total_earning = round(total_earning,2)
     context = {
         'all_post':reports,
+        'total_earning':total_earning
     }
     return render(request,'selling_report.html',context) 
 

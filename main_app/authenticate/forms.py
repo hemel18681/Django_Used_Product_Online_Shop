@@ -10,9 +10,8 @@ class uploadformuserpic_post(forms.ModelForm):
 class uploadformuserpic_get(forms.ModelForm):
     class Meta:
         model = user_info
-        fields = ('user_picture', 'user_password','user_card_number')
+        fields = ('user_picture', 'user_password',)
         widgets = {
             'user_password' : forms.TextInput(attrs={'class': 'form-control', 'type': 'password'}),
             'user_picture' : forms.FileInput(attrs={'class': 'form-control','default': 'x' }),
-            'user_card_number' : forms.TextInput(attrs={'class': 'form-control'}),
         }

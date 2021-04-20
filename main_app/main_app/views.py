@@ -9,6 +9,7 @@ from main_app.settings import EMAIL_HOST_USER
 from post_details.models import pending_post, running_post, done_post
 from reporting.models import selling_report
 from django.http import JsonResponse
+from decimal import Decimal
 import json
 
 
@@ -42,12 +43,18 @@ def post_view(request,post_id):
     id = post_id
     post_details = running_post.objects.filter(id=id)
     details = post_details.values()
+    service_charge = details[0]['post_money'] * Decimal( 0.05)
+    main_price = details[0]['post_money'] *  Decimal( 0.95)
+    service_charge = round(service_charge,2)
+    main_price = round(main_price,2)
     print(details)
     user_phone_number = details[0]['user_phone_number']
     user_details = user_info.objects.filter(user_phone_number = user_phone_number)
     context = {
         'post_details':post_details,
         'user_details':user_details,
+        'service_charge':service_charge,
+        'main_price':main_price
     }
     return render(request,'post_preview.html',context)
 
@@ -68,12 +75,18 @@ def complete_payment_work(request,post_id):
     id = int(post_id)
     post_details = running_post.objects.filter(id=id)
     details = post_details.values()
+    service_charge = details[0]['post_money'] * Decimal( 0.05)
+    main_price = details[0]['post_money'] *  Decimal( 0.95)
+    service_charge = round(service_charge,2)
+    main_price = round(main_price,2)
     print(details)
     user_phone_number = details[0]['user_phone_number']
     user_details = user_info.objects.filter(user_phone_number = user_phone_number)
     context = {
         'post_details':post_details,
         'user_details':user_details,
+        'service_charge':service_charge,
+        'main_price':main_price
     }
     return render(request,'confirm_payment.html',context)
 
@@ -99,6 +112,7 @@ def make_report(request):
     saverecord.buyer_phone_number = buyer_phone_number
     saverecord.selling_price = selling_price
     saverecord.profit_price = profit_price
+    saverecord.product_id = id
     saverecord.save()
     saverecord = done_post()
     saverecord.user_phone_number = details[0]['user_phone_number']

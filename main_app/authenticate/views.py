@@ -68,7 +68,6 @@ def auth_registration(request):
                 user_mail = request.POST['user_mail']
                 user_password = request.POST['user_password']
                 user_confirm_password = request.POST['user_confirm_password']
-                user_card_number = request.POST['user_card_number']
                 if user_info.objects.filter(user_phone_number=user_phone_number).exists():
                     messages.error(request,'You are already registered with this phone number.')
                 elif user_info.objects.filter(user_name=user_name).exists():
@@ -97,7 +96,6 @@ def auth_registration(request):
                 user_mail = request.POST['user_mail']
                 user_password = request.POST['user_password']
                 user_confirm_password = request.POST['user_confirm_password']
-                user_card_number = request.POST['user_card_number']
                 if user_info.objects.filter(user_phone_number=user_phone_number).exists():
                     messages.error(request,'You are already registered with this phone number.')
                 elif user_info.objects.filter(user_name=user_name).exists():

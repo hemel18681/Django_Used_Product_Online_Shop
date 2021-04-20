@@ -25,7 +25,7 @@ SECRET_KEY = 'psvx)w8up8khi-(sc*ptoad5p*awolto_@s!mwsscts(b9e9_d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['63c77b15cde0.ngrok.io','localhost','127.0.0.1','testserver']
+ALLOWED_HOSTS = ['7584f5d49f28.ngrok.io','localhost','127.0.0.1','testserver']
 
 
 # Application definition

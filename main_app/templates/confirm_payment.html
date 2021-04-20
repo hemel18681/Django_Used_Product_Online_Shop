@@ -73,8 +73,12 @@
                 <label type="text" class="form-control" name="post_title" id="post_title">{{post_details.0.post_title}}</label>
             </div>  
             <div class="form-group">
-                <label for="post_title"><b>Asked Price:</b></label>
-                <label type="text" class="form-control" name="post_title" id="post_title">{{post_details.0.post_money}}</label>
+                <label for="main_price"><b>Asked Price:</b></label>
+                <label type="text" class="form-control" name="main_price" id="main_price">{{main_price}}</label>
+            </div>  
+            <div class="form-group">
+                <label for="service_charge"><b>Asked Price:</b></label>
+                <label type="text" class="form-control" name="service_charge" id="service_charge">{{service_charge}}</label>
             </div>  
             <div class="form-group">
                 <label for="post_title"><b>How many days has beed used this product:</b></label>
@@ -132,6 +136,7 @@
 
 
                     var productId = '{{post_details.0.id}}'
+                    var productPrice = '{{main_price}}'
                     function startReport(){
                         var url = "{% url 'generate_report' %}"
                         fetch(url,{
@@ -166,7 +171,7 @@
                                 var first =  actions.order.create({
                                     purchase_units: [{
                                         amount: {
-                                            value: '50'
+                                            value: productPrice
                                         },
                                         payee:{
                                             email_address:'hudai2@gmail.com'
