@@ -15,5 +15,6 @@ urlpatterns = [
     path('payment/<int:post_id>/',views.complete_payment_work,name='complete_payment'),
     path('order_done/',views.make_report,name='generate_report'),
     path('thank-you/',views.thankyou,name='thank_you'),
-    path('report/',include('reporting.urls'))
+    path('report/',include('reporting.urls')),
+    path('search/<str:search_name>',views.search_product,name='search_result')
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

@@ -13,7 +13,17 @@ import json
 
 
 def home(request):
-    all_post = running_post.objects.all().order_by('post_given_date').reverse()
+    if request.method=='POST':
+        print(str(request.POST['search_name']))
+        namel = str(request.POST['search_name']).lower()
+        nameu = str(request.POST['search_name']).upper()
+        name = str(request.POST['search_name'])
+        all_postl = running_post.objects.filter(post_title=namel)
+        all_postu = running_post.objects.filter(post_title=nameu)
+        all_posto = running_post.objects.filter(post_title=name)
+        all_post = all_postl | all_posto | all_postu
+    else:
+        all_post = running_post.objects.all().order_by('post_given_date').reverse()
     
     context = {
         'all_post':all_post,
@@ -116,3 +126,13 @@ def make_report(request):
 
 def thankyou(request):
     return render(request,'thankyou.html')
+
+
+def search_product(request,search_name):
+    name = search_name
+    print(name)
+    post_details = running_post.objects.filter(post_title=name)
+    context = {
+        'all_post':post_details,
+    }
+    return render(request,'search_page.html',context)
