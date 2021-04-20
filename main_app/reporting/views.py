@@ -21,7 +21,18 @@ def check_report(request):
     if request.method=="POST":
         formdate = request.POST['formdate']
         todate = request.POST['todate']
-        reports=selling_report.objects.filter(selling_date__lte=todate,selling_date__gte=formdate)
+        if request.POST['option'] == "indivisuals" and request.POST['user_id'] is None:
+            messages.error(request,'you entered indivisual but didn\'t gave any user id')
+            reports=selling_report.objects.all()
+        elif request.POST['option'] == "indivisualb" and request.POST['user_id'] is None:
+            messages.error(request,'you entered indivisual but didn\'t gave any user id')
+            reports=selling_report.objects.all()
+        elif request.POST['option'] == "indivisuals" and request.POST['user_id'] is not None:
+            reports=selling_report.objects.filter(seller_phone_number=int(request.POST['user_id']), selling_date__lte=todate,selling_date__gte=formdate)
+        elif request.POST['option'] == "indivisualb" and request.POST['user_id'] is not None:
+            reports=selling_report.objects.filter(buyer_phone_number=int(request.POST['user_id']), selling_date__lte=todate,selling_date__gte=formdate)
+        else:
+            reports=selling_report.objects.filter(selling_date__lte=todate,selling_date__gte=formdate)
     else:
         reports=selling_report.objects.all()
     context = {

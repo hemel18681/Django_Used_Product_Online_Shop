@@ -3,8 +3,8 @@ from django.contrib import admin
 from .models import selling_report
 
 class show_on_admin(admin.ModelAdmin):
-    readonly_fields = ('seller_phone_number','buyer_phone_number','selling_price','profit_price','selling_date')
-    list_display = ('selling_date', 'profit_price','buyer_phone_number')
+    readonly_fields = ('seller_phone_number','buyer_phone_number','selling_price','profit_price','selling_date','product_id')
+    list_display = ('selling_date','product_id', 'profit_price','buyer_phone_number')
     def thumbnail_preview(self, obj):
         return obj.thumbnail_preview
 

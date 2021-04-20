@@ -96,6 +96,7 @@ def make_report(request):
     saverecord.post_description = details[0]['post_description']
     saverecord.post_picture = details[0]['post_picture']
     saverecord.post_money = details[0]['post_money']
+    saverecord.product_id = details[0]['id']
     saverecord.post_used_days = details[0]['post_used_days']
     saverecord.done_post = True
     saverecord.post_given_date = details[0]['post_given_date']

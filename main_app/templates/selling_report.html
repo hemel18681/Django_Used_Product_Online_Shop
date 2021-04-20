@@ -1,7 +1,7 @@
 <style>
 	.login-form {
 		width: 340px;
-    	margin: 53px auto;
+    	margin: 30px auto;
 	}
     .login-form form {
     	margin-bottom: 15px;
@@ -46,31 +46,50 @@
 					<main id="main" class="site-main">
 					<div class="grid portfoliogrid">
                         
-                        <br>
-                        <div class="login-form">
-                            <form method="post">
-                                {% csrf_token %}
-                                <br>
-                                <h2 class="text-center">Search Report Day Wise</h2>    
-                                {% for message in messages %}
-                                    <div class="alert {{ message.tags }} alert-dismissible" role="alert">
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                        </button>
-                                        {{ message }}
+                        <table style="margin-left: auto; margin-right: auto;">
+                            <tr>
+                                <td>
+                                    <div class="login-form">
+                                        <form method="post">
+                                            {% csrf_token %}
+                                            <br>
+                                            <h2 class="text-center">Search Report Day Wise</h2>    
+                                            {% for message in messages %}
+                                                <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                    {{ message }}
+                                                </div>
+                                            {% endfor %}   
+                                            <div class="form-group">
+                                                <input type="date" class="form-control" name="formdate" id="formdate" required="required">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="date" class="form-control" name="todate" id="todate"  required="required">
+                                            </div>
+                                            <div>
+                                                <label for="option">Choose a type:</label> <br>
+                                                <select name="option" id="option">
+                                                    <option value="overall">Overall Report</option>
+                                                    <option value="indivisuals">Indivisual Seller Report</option>
+                                                    <option value="indivisualb">Indivisual Buyer Report</option>
+                                                </select>
+                                                <br> <br>
+                                                <label for="user_id">User Phone Number</label>
+                                                <input type="text" class="form-control" name="user_id" id="user_id">
+                                                <small>(if the search is for overall report then there is not need to input user phone number)*</small>
+                                                <br>
+                                                <br>
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-primary btn-block">Search</button>
+                                            </div>  
+                                        </form>
                                     </div>
-                                {% endfor %}   
-                                <div class="form-group">
-                                    <input type="date" class="form-control" name="formdate" id="formdate" required="required">
-                                </div>
-                                <div class="form-group">
-                                    <input type="date" class="form-control" name="todate" id="todate"  required="required">
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary btn-block">Search</button>
-                                </div>  
-                            </form>
-                        </div>
+                                </td>
+                            </tr>
+                        </table>
 
 
 						<article class="hentry">
@@ -84,6 +103,8 @@
                                         <th></th> <th></th> <th></th> 
                                         <th>Buyer Phone Number</th>
                                         <th></th> <th></th> <th></th> 
+                                        <th>Product ID</th>
+                                        <th></th> <th></th> <th></th> 
                                         <th>Product Price</th>
                                         <th></th> <th></th> <th></th>
                                         <th>Profit</th>
@@ -96,11 +117,14 @@
                                             <td></td> <td></td> <td></td>
                                             <td><label>{{post.buyer_phone_number}}</label></td>
                                             <td></td> <td></td> <td></td>
+                                            <td><label>{{post.product_id}}</label></td>
+                                            <td></td> <td></td> <td></td>
                                             <td><label>{{post.selling_price}}</label></td>
                                             <td></td> <td></td> <td></td>
                                             <td><label>{{post.profit_price}}</label></td>
                                         </tr>
                                         <tr>
+                                            <td></td>
                                             <td></td>
                                             <td></td>
                                             <td></td>

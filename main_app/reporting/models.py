@@ -4,6 +4,7 @@ from django.db import models
 class selling_report(models.Model):
     seller_phone_number = models.IntegerField()
     buyer_phone_number = models.IntegerField()
+    product_id = models.IntegerField()
     selling_price = models.DecimalField(max_digits=20, decimal_places=4)
     profit_price = models.DecimalField(max_digits=20, decimal_places=4)
     selling_date = models.DateField( auto_now_add=True)
