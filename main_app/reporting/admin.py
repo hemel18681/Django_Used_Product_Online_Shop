@@ -3,8 +3,13 @@ from django.contrib import admin
 from .models import selling_report
 
 class show_on_admin(admin.ModelAdmin):
-    readonly_fields = ('user_phone_number','post_title','post_description','post_picture','thumbnail_preview','post_money','post_used_days','post_given_date')
-    
+    readonly_fields = ('seller_phone_number','buyer_phone_number','selling_price','profit_price','selling_date')
+    list_display = ('selling_date', 'profit_price','buyer_phone_number')
+    def thumbnail_preview(self, obj):
+        return obj.thumbnail_preview
+
+    thumbnail_preview.short_description = 'Thumbnail Preview'
+    thumbnail_preview.allow_tags = True
 
 
-admin.site.register(selling_report,)
+admin.site.register(selling_report,show_on_admin,)

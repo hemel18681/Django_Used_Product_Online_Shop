@@ -139,7 +139,7 @@ def forget_password(request):
             recepient = str(user_mail)
             send_mail(subject,message,EMAIL_HOST_USER,[recepient],fail_silently= False)
             messages.success(request,"Cheak Your mail to login.")
-            return render(request,'authenticate/login.html')
+            return redirect('login_page')
         else:
             messages.success(request,"You are not registered. You can register yourself.")
             return render(request,'authenticate/registration.html')

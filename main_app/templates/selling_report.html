@@ -1,0 +1,139 @@
+<style>
+	.login-form {
+		width: 340px;
+    	margin: 53px auto;
+	}
+    .login-form form {
+    	margin-bottom: 15px;
+        background: #f7f7f7;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        padding: 30px;
+    }
+    .login-form h2 {
+        margin: 0 0 15px;
+    }
+    .form-control, .btn {
+        min-height: 38px;
+        border-radius: 2px;
+    }
+    .btn {        
+        font-size: 15px;
+        font-weight: bold;
+    }
+	
+</style>
+
+{% extends 'layouts.html' %}
+
+{% block changeable_body %}
+<div class="login-form">
+  {% for message in messages %}
+    <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+        {{ message }}
+    </div>
+  {% endfor %}   
+</div>
+
+<div>
+	
+	<div id="page">
+		<div class="container" style="background-color: #f7f7f7;">
+			<div id="content" class="site-content">
+				<div id="primary" class="content-area column full">
+					<main id="main" class="site-main">
+					<div class="grid portfoliogrid">
+                        
+                        <br>
+                        <div class="login-form">
+                            <form method="post">
+                                {% csrf_token %}
+                                <br>
+                                <h2 class="text-center">Search Report Day Wise</h2>    
+                                {% for message in messages %}
+                                    <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}   
+                                <div class="form-group">
+                                    <input type="date" class="form-control" name="formdate" id="formdate" required="required">
+                                </div>
+                                <div class="form-group">
+                                    <input type="date" class="form-control" name="todate" id="todate"  required="required">
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-block">Search</button>
+                                </div>  
+                            </form>
+                        </div>
+
+
+						<article class="hentry">
+						<header class="entry-header">
+                            <div style="text-align: center;">
+                                <table style="text-align: center; margin-left: auto; margin-right: auto;">
+                                    <tr>
+                                        <th>Date</th>
+                                        <th></th> <th></th> <th></th>
+                                        <th>Seller Phone Number</th>
+                                        <th></th> <th></th> <th></th> 
+                                        <th>Buyer Phone Number</th>
+                                        <th></th> <th></th> <th></th> 
+                                        <th>Product Price</th>
+                                        <th></th> <th></th> <th></th>
+                                        <th>Profit</th>
+                                    </tr>
+                                    {% for post in all_post %}
+                                        <tr>
+                                            <td><label>{{post.selling_date}}</label></td>
+                                            <td></td> <td></td> <td></td>
+                                            <td><label>{{post.seller_phone_number}}</label></td>
+                                            <td></td> <td></td> <td></td>
+                                            <td><label>{{post.buyer_phone_number}}</label></td>
+                                            <td></td> <td></td> <td></td>
+                                            <td><label>{{post.selling_price}}</label></td>
+                                            <td></td> <td></td> <td></td>
+                                            <td><label>{{post.profit_price}}</label></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                            </div>
+						<div class="entry-thumbnail">
+							
+						</div>
+						
+						</header>
+						</article>
+					</div>
+					<!-- .grid -->
+					<br/>
+					</main>
+					<!-- #main -->
+				</div>
+				<!-- #primary -->
+			</div>
+			<!-- #content -->
+		</div>
+		<!-- .container -->
+		<a href="#top" class="smoothup" title="Back to top"><span class="genericon genericon-collapse"></span></a>
+	</div>
+    <br>
+</div>
+
+{% endblock changeable_body %}
+
+{% block changeable_page_title %}
+      WA_x0r_AC | Used Product Online Shop
+{% endblock changeable_page_title %}

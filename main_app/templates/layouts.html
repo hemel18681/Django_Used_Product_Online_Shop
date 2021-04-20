@@ -66,9 +66,10 @@
                         {{request.user.username}}
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="font-size: small;">
-                            <a class="dropdown-item" href="{% url 'admin_page' %}">Admin Work Page</a>
-                            <a class="dropdown-item" href="{% url 'syncronize_post' %}">Syncronize</a>
-                            <a class="dropdown-item" href="/admin/logout/" type="submit">LogOut</a>
+                            <a class="dropdown-item" href="{% url 'admin_page' %}"style="font-size: medium;">Admin Work Page</a>
+                            <a class="dropdown-item" href="{% url 'syncronize_post' %}"style="font-size: medium;">Syncronize</a>
+                            <a class="dropdown-item" href="{% url 'check_reports' %}"style="font-size: medium;">Check reports</a>
+                            <a class="dropdown-item" href="/admin/logout/"style="font-size: medium;" type="submit">LogOut</a>
                         </div>
                     </div>
                 {% elif request.session.user_name%}

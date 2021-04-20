@@ -13,7 +13,8 @@ import json
 
 
 def home(request):
-    all_post = running_post.objects.all()
+    all_post = running_post.objects.all().order_by('post_given_date').reverse()
+    
     context = {
         'all_post':all_post,
     }
@@ -101,16 +102,16 @@ def make_report(request):
     saverecord.save()
     running_post.objects.filter(id=id).delete()
     subject = 'Sold Product from WA_x0r_AC'
-    message = 'Your Product "' + str(post_details) + '"has been sold to User Name: ' + str(user_name) + ' Phone Number: ' + str(buyer_phone_number)
+    message = 'Your Product "' + str(details[0]['post_title']) + '"has been sold to User Name: ' + str(user_name) + ' Phone Number: ' + str(buyer_phone_number)
     user_mail = buyer_details[0]['user_mail']
     recepient = str(user_mail)
     send_mail(subject,message,EMAIL_HOST_USER,[recepient],fail_silently= False)
     subject = 'Purchase Product from WA_x0r_AC'
-    message = 'Product "' + str(post_details) + '"has been sold to you by User Name: ' + str(seller_name) + ' Phone Number: ' + str(seller_phone_number)
+    message = 'Product "' + str(details[0]['post_title']) + '"has been sold to you by User Name: ' + str(seller_name) + ' Phone Number: ' + str(seller_phone_number)
     seller_mail = seller_details[0]['user_mail']
     recepient = str(seller_mail)
     send_mail(subject,message,EMAIL_HOST_USER,[recepient],fail_silently= False)
-    return render(request,'confirm_payment.html')
+    return JsonResponse('Service Charge Complete', safe=False)
 
 def thankyou(request):
     return render(request,'thankyou.html')

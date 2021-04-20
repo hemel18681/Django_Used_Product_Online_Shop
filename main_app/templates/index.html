@@ -1,7 +1,9 @@
 <style>
 	.login-form {
 		width: 340px;
+        height: auto;
     	margin: 50px auto;
+		margin-bottom: 152px;
 	}
     .login-form form {
     	margin-bottom: 15px;
@@ -20,7 +22,6 @@
         font-size: 15px;
         font-weight: bold;
     }
-	
 </style>
 
 {% extends 'layouts.html' %}
@@ -53,13 +54,20 @@
 										<label hidden>{{post.id}}</label>
 										<table>
 											<tr>
-												<td>
+												<td rowspan="2">
 													<img src="{{ post.post_picture.url }}" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" style="width: 250px; height: 250px;" alt="p1"/>
 												</td>
 												<td style="width: 100px;"></td>
+												<td >
+													<h3><b>Product Price</b></h3>
+													<p style="color: lavenderblush; font-size:x-large;">{{post.post_money}}/= tk</p>
+												</td>
+											</tr>
+											<tr>
+												<td style="width: 100px;"></td>
 												<td> 
-													<h4><b>Post Description:</b></h4>
-													<p>{{post.post_description|truncatechars_html:30}}</p>
+													<h3><b>Post Description:</b></h3>
+													<p style="color: lavenderblush; font-size:x-large;">{{post.post_description|truncatechars_html:30}}</p>
 												</td>
 											</tr>
 										</table>
